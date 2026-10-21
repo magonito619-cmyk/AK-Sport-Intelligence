@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="AK Sports Intelligence — gestiona jugadores, evaluaciones, entrenamientos, partidos y táctica en un solo lugar. Tus datos se quedan en tu dispositivo.">
+<meta name="theme-color" content="#07110f">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="index,follow">
+<meta property="og:locale" content="es_MX">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon.svg">
+<meta property="og:title" content="AK Sports Intelligence — Rendimiento deportivo">
+<meta property="og:description" content="Evalúa, planifica y decide con datos reales de tu equipo.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2319d391'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-size='28' font-family='Arial' font-weight='bold' fill='%2304110c'%3EAK%3C/text%3E%3C/svg%3E">
+<title>AK Sports Intelligence V4 — Plataforma de Rendimiento Deportivo</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<noscript><p style="padding:20px">Esta aplicación necesita JavaScript para funcionar.</p></noscript>
+
+<!-- ============ SITIO PÚBLICO ============ -->
+<div id="publicSite" class="public">
+<header class="navbar">
+  <div class="container navin">
+    <a class="brand" href="#/"><span class="logo" aria-hidden="true">AK</span><span>AK Sports Intelligence</span></a>
+    <nav class="navlinks" aria-label="Sitio"><a href="#funciones">Funciones</a><a href="#como">Cómo funciona</a><a href="#planes">Planes</a></nav>
+    <button class="btn btn-primary" id="publicCta" data-action="openLogin">Entrar / Probar gratis</button>
+  </div>
+</header>
+<main>
+<section class="hero">
+  <div class="container">
+    <span class="badge">⚡ Plataforma de rendimiento deportivo</span>
+    <h1>Convierte tus datos en <span>mejores decisiones</span></h1>
+    <p class="sub">Gestiona jugadores, evaluaciones, entrenamientos, partidos y táctica desde un solo lugar. Hecha para entrenadores, academias y equipos que quieren profesionalizar su análisis.</p>
+    <div class="hero-actions">
+      <button class="btn btn-primary" data-action="openLogin">🚀 Comenzar ahora</button>
+      <a class="btn btn-dark" href="#funciones">Ver funciones</a>
+    </div>
+    <div class="trust"><span>🔒 Tus datos se quedan en tu dispositivo</span><span>📴 Funciona sin internet</span><span>📤 Exporta cuando quieras</span></div>
+    <div class="hero-card" aria-hidden="true">
+      <div class="mock">
+        <div class="mock-side"><div class="sel">▦ Dashboard</div><div>👥 Jugadores</div><div>📊 Evaluaciones</div><div>🏋️ Entrenamientos</div><div>🏆 Partidos</div><div>⚽ Pizarra</div></div>
+        <div class="mock-main">
+          <div class="mcard"><small>Rendimiento medio</small><b>87%</b><small>↑ evolución</small></div>
+          <div class="mcard"><small>Jugadores</small><b>24</b><small>en plantilla</small></div>
+          <div class="mcard"><small>Carga semanal</small><b>1 840</b><small>min × RPE</small></div>
+          <div class="mcard" style="grid-column:1/-1"><small>Perfil del equipo (vista previa)</small><div class="mockbars"><i style="height:68%"><span>TEC</span></i><i style="height:84%"><span>TAC</span></i><i style="height:76%"><span>FIS</span></i><i style="height:62%"><span>PSI</span></i></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="funciones" class="section"><div class="container">
+<h2>Todo el rendimiento en un solo lugar</h2><p class="lead">Registra una vez y obtén indicadores calculados con tus propios datos: nada de cifras de relleno.</p>
+<div class="features">
+  <article class="feature"><div class="ico">📊</div><h3>Dashboard real</h3><p>Rendimiento medio, perfil técnico-táctico-físico-psicológico, tendencia y alertas calculadas con tus evaluaciones.</p></article>
+  <article class="feature"><div class="ico">👥</div><h3>Perfil de jugador</h3><p>Radar de capacidades, evolución en el tiempo, historial de evaluaciones e informe imprimible.</p></article>
+  <article class="feature"><div class="ico">⚽</div><h3>Pizarra táctica</h3><p>Formaciones, flechas, material, jugadas guardadas y animación de inicio a final.</p></article>
+  <article class="feature"><div class="ico">🏋️</div><h3>Planificador con carga</h3><p>Sesiones con bloques, duración y RPE; calcula la carga semanal (minutos × RPE).</p></article>
+  <article class="feature"><div class="ico">🏆</div><h3>Partidos</h3><p>Resultados, local/visitante, balance G-E-P, goles y racha reciente.</p></article>
+  <article class="feature"><div class="ico">🧠</div><h3>Asistente de sesiones</h3><p>Propone sesiones y lee tus datos. Modo reglas incluido; listo para conectar una IA real desde tu backend.</p></article>
+</div></div></section>
+
+<section id="como" class="section"><div class="container">
+<h2>De la cancha al dato</h2><p class="lead">Un flujo simple: registra, evalúa, analiza y decide.</p>
+<div class="features">
+  <article class="feature"><span class="badge">01</span><h3>Registra</h3><p>Crea tu club, importa tu plantilla desde CSV o agrégala a mano.</p></article>
+  <article class="feature"><span class="badge">02</span><h3>Evalúa</h3><p>Captura técnica, táctica, físico y psicológico con historial por fecha.</p></article>
+  <article class="feature"><span class="badge">03</span><h3>Decide</h3><p>Consulta tendencias, alertas y planifica la siguiente sesión.</p></article>
+</div></div></section>
+
+<section id="planes" class="section"><div class="container">
+<h2>Planes para crecer contigo</h2><p class="lead">Precios de referencia del prototipo. En esta versión todas las funciones están abiertas para que puedas probarlas.</p>
+<div class="pricing">
+  <div class="price"><h3>Free Trial</h3><div class="amount">$0</div><ul><li>7 días de prueba</li><li>Todas las funciones demo</li><li>Datos locales</li></ul><button class="btn btn-dark" data-action="openLogin" data-plan="Free Trial">Probar</button></div>
+  <div class="price featured"><h3 style="color:var(--green)">Premium</h3><div class="amount">$399 <small>MXN/mes</small></div><ul><li>Plantilla y evaluaciones</li><li>Entrenamientos y carga</li><li>Partidos y estadísticas</li></ul><button class="btn btn-primary" data-action="openLogin" data-plan="Premium">Elegir Premium</button></div>
+  <div class="price"><h3 style="color:var(--blue)">Pro</h3><div class="amount">$799 <small>MXN/mes</small></div><ul><li>Todo Premium</li><li>Asistente de sesiones</li><li>Informes imprimibles</li></ul><button class="btn btn-blue" data-action="openLogin" data-plan="Pro">Elegir Pro</button></div>
+  <div class="price"><h3 style="color:var(--gold)">Ultra Pro</h3><div class="amount">$1,399 <small>MXN/mes</small></div><ul><li>Todo Pro</li><li>Multi-club (próximamente)</li><li>Sincronización en la nube (próximamente)</li></ul><button class="btn" style="background:var(--gold);color:#171000" data-action="openLogin" data-plan="Ultra Pro">Elegir Ultra</button></div>
+</div>
+<p class="note">Los pagos y la sincronización en la nube requieren un servidor y no están activos en esta versión.</p>
+</div></section>
+
+<section class="container"><div class="cta"><h2>Tu equipo ya genera datos.</h2><p>Ahora conviértelos en decisiones deportivas.</p><button class="btn btn-primary" data-action="openLogin">🚀 Entrar a AK Sports Intelligence</button></div></section>
+</main>
+<footer class="footer">AK Sports Intelligence · V4 · Prototipo funcional. Tus datos se guardan solo en este navegador; si registras menores de edad, protégelos y exporta respaldos con regularidad.</footer>
+</div>
+
+<!-- ============ APLICACIÓN ============ -->
+<div id="app" class="app" hidden>
+<header class="appbar">
+  <div class="appbrand"><img id="clubLogo" class="clublogo" alt="" referrerpolicy="no-referrer"><div><b id="clubName">AK Sports Intelligence</b><div style="font-size:10px;color:var(--muted)" id="planText"></div></div></div>
+  <div class="app-actions"><span id="trialBadge" class="badge"></span><button class="btn btn-dark btn-sm" data-action="showPublic">Sitio público</button><div class="userpill" id="userPill"></div></div>
+</header>
+<div class="layout">
+<aside class="sidebar"><nav aria-label="Principal">
+ <div class="side-title">Principal</div>
+ <a class="navitem" href="#/app/dashboard" data-page="dashboard">▦ Dashboard</a>
+ <a class="navitem" href="#/app/players" data-page="players">👥 Jugadores</a>
+ <a class="navitem" href="#/app/evaluations" data-page="evaluations">📊 Evaluaciones</a>
+ <a class="navitem" href="#/app/training" data-page="training">🏋️ Entrenamientos</a>
+ <a class="navitem" href="#/app/matches" data-page="matches">🏆 Partidos</a>
+ <a class="navitem" href="#/app/tactics" data-page="tactics">⚽ Pizarra táctica</a>
+ <a class="navitem" href="#/app/assistant" data-page="assistant">🧠 Asistente</a>
+ <div class="side-title">Club</div>
+ <a class="navitem" href="#/app/club" data-page="club">🎨 Personalizar</a>
+ <a class="navitem" href="#/app/data" data-page="data">💾 Datos y respaldo</a>
+</nav></aside>
+
+<main id="main" class="content" tabindex="-1">
+<div id="banner"></div>
+
+<section id="page-dashboard" class="page" data-title="Dashboard">
+<div class="pagehead"><div><h1>Dashboard de rendimiento</h1><p>Indicadores calculados con las evaluaciones, entrenamientos y partidos que registraste.</p></div><div class="toolbar noprint" style="margin:0"><button class="btn btn-dark" data-action="print">🖨️ Imprimir</button><button class="btn btn-primary" data-action="newPlayer">+ Jugador</button></div></div>
+<div id="dashStats" class="grid4"></div>
+<div class="two"><div class="panel"><h2>Perfil del equipo (última evaluación de cada jugador)</h2><div id="dashDims"></div></div><div class="panel"><h2>Evolución del rendimiento</h2><div id="dashTrend"></div></div></div>
+<div class="three"><div class="panel"><h2>Top rendimiento</h2><div id="dashTop"></div></div><div class="panel"><h2>Plantilla por posición</h2><div id="dashPos"></div></div><div class="panel"><h2>Alertas y sugerencias <span class="badge" style="margin-left:6px">automático</span></h2><ul id="dashInsights" class="insights"></ul></div></div>
+<div class="panel" style="margin-top:16px"><h2>Forma reciente</h2><div id="dashForm"></div></div>
+</section>
+
+<section id="page-players" class="page" data-title="Jugadores">
+<div class="pagehead"><div><h1>Plantilla y jugadores</h1><p>Perfiles individuales, estado y rendimiento.</p></div><button class="btn btn-primary" data-action="newPlayer">+ Agregar jugador</button></div>
+<div class="panel"><div class="toolbar">
+ <input class="input" id="playerSearch" type="search" placeholder="Buscar por nombre o dorsal…" aria-label="Buscar jugador">
+ <select class="input" id="playerPos" aria-label="Filtrar por posición"></select>
+ <select class="input" id="playerSort" aria-label="Ordenar por"><option value="num">Orden: dorsal</option><option value="name">Orden: nombre</option><option value="perf">Orden: rendimiento</option><option value="age">Orden: edad</option></select>
+ <button class="btn btn-dark" data-action="importCSV">📥 Importar CSV</button><button class="btn btn-dark" data-action="exportCSV">📤 Exportar CSV</button>
+</div>
+<div class="tablewrap"><table class="table"><caption class="hidden">Lista de jugadores</caption><thead><tr><th>Dorsal</th><th>Jugador</th><th>Posición</th><th>Edad</th><th>Rendimiento</th><th>Estado</th><th><span class="hidden">Acciones</span></th></tr></thead><tbody id="playersBody"></tbody></table></div></div>
+</section>
+
+<section id="page-evaluations" class="page" data-title="Evaluaciones">
+<div class="pagehead"><div><h1>Evaluaciones deportivas</h1><p>Técnica, táctica, físico y psicológico, con historial por fecha.</p></div><button class="btn btn-primary" data-action="newEval">+ Nueva evaluación</button></div>
+<div class="two"><div class="panel"><h2>Perfil promedio del equipo</h2><div id="evRadar"></div><div id="evDims"></div></div><div class="panel"><h2>Evolución del equipo</h2><div id="evTrend"></div></div></div>
+<div class="panel tablewrap" style="margin-top:16px"><h2>Historial</h2><table class="table"><thead><tr><th>Fecha</th><th>Jugador</th><th>Técnica</th><th>Táctica</th><th>Físico</th><th>Psicol.</th><th>General</th><th><span class="hidden">Acciones</span></th></tr></thead><tbody id="evBody"></tbody></table></div>
+</section>
+
+<section id="page-training" class="page" data-title="Entrenamientos">
+<div class="pagehead"><div><h1>Planificador de entrenamientos</h1><p>Sesiones con bloques, duración y carga (minutos × RPE).</p></div><button class="btn btn-primary" data-action="newTraining">+ Crear sesión</button></div>
+<div id="trainSummary" class="grid4" style="margin-bottom:16px"></div>
+<div id="trainingList" class="cards"></div>
+</section>
+
+<section id="page-matches" class="page" data-title="Partidos">
+<div class="pagehead"><div><h1>Partidos</h1><p>Historial competitivo y balance.</p></div><button class="btn btn-primary" data-action="newMatch">+ Registrar partido</button></div>
+<div id="matchSummary" class="grid4" style="margin-bottom:16px"></div>
+<div class="panel tablewrap"><table class="table"><thead><tr><th>Fecha</th><th>Rival</th><th>Sede</th><th>Resultado</th><th>Competición</th><th>Notas</th><th><span class="hidden">Acciones</span></th></tr></thead><tbody id="matchesBody"></tbody></table></div>
+</section>
+
+<section id="page-tactics" class="page" data-title="Pizarra táctica">
+<div class="pagehead"><div><h1>Pizarra táctica</h1><p>Arrastra fichas (o enfócalas y usa las flechas del teclado). Dibuja recorridos y guarda tus jugadas.</p></div></div>
+<div class="tactics">
+ <div class="board" id="board" aria-label="Campo de fútbol">
+  <svg class="pitch" id="pitch" viewBox="0 0 105 68" aria-hidden="true"></svg>
+  <div class="tokens" id="tokens"></div>
+  <svg class="drawlayer" id="drawlayer" viewBox="0 0 105 68" aria-label="Capa de dibujo"><g id="strokes"></g></svg>
+ </div>
+ <div class="panel tools">
+  <h3>Modo</h3>
+  <button class="btn btn-dark" data-action="setMode" data-mode="move" aria-pressed="true">✋ Mover fichas</button>
+  <button class="btn btn-dark" data-action="setMode" data-mode="free" aria-pressed="false">✏️ Dibujar libre</button>
+  <button class="btn btn-dark" data-action="setMode" data-mode="arrow" aria-pressed="false">➡️ Flecha</button>
+  <div class="swatches" role="group" aria-label="Color de dibujo">
+   <button class="swatch" style="background:#f5b942" data-action="setColor" data-c="#f5b942" aria-label="Amarillo" aria-pressed="true"></button>
+   <button class="swatch" style="background:#ffffff" data-action="setColor" data-c="#ffffff" aria-label="Blanco" aria-pressed="false"></button>
+   <button class="swatch" style="background:#60a5fa" data-action="setColor" data-c="#60a5fa" aria-label="Azul" aria-pressed="false"></button>
+   <button class="swatch" style="background:#ef5350" data-action="setColor" data-c="#ef5350" aria-label="Rojo" aria-pressed="false"></button>
+  </div>
+  <button class="btn btn-dark" data-action="undoStroke">↩️ Deshacer trazo</button>
+  <button class="btn btn-dark" data-action="clearStrokes">🧽 Borrar dibujo</button>
+  <h3>Formaciones</h3>
+  <div class="field"><label for="formHome">Mi equipo</label><select id="formHome"></select></div>
+  <div class="field"><label for="formAway">Rival</label><select id="formAway"></select></div>
+  <button class="btn btn-dark" data-action="toggleRivals">👥 Mostrar/ocultar rival</button>
+  <button class="btn btn-dark" data-action="addGear" data-type="ball">⚽ Agregar balón</button>
+  <button class="btn btn-dark" data-action="addGear" data-type="cone">🔶 Agregar cono</button>
+  <button class="btn btn-dark" data-action="resetBoard">🔄 Posiciones iniciales</button>
+  <h3>Animación</h3>
+  <button class="btn btn-dark" data-action="fixStart">📍 Fijar inicio</button>
+  <button class="btn btn-dark" data-action="fixEnd">🏁 Fijar final</button>
+  <button class="btn btn-dark" data-action="playAnim">▶️ Reproducir</button>
+  <button class="btn btn-dark" data-action="gotoStart">⏮️ Ir al inicio</button>
+  <button class="btn btn-primary" data-action="savePlay">💾 Guardar jugada</button>
+ </div>
+</div>
+<div class="panel" style="margin-top:16px"><h2>Jugadas guardadas</h2><div id="playsList"></div></div>
+</section>
+
+<section id="page-assistant" class="page" data-title="Asistente">
+<div class="pagehead"><div><h1>Asistente de sesiones</h1><p>Modo reglas: responde con tus datos y plantillas de entrenamiento. No es una IA externa.</p></div></div>
+<div class="panel chat">
+ <div class="messages" id="messages" role="log" aria-live="polite"><div class="bubble ai">👋 Hola. Puedo proponerte sesiones y leer tus datos. Prueba con:
+  <div class="chips" style="margin-top:8px"><button class="btn btn-dark btn-sm" data-action="askChip" data-q="Crea una sesión de presión tras pérdida">Presión tras pérdida</button><button class="btn btn-dark btn-sm" data-action="askChip" data-q="Sesión de velocidad">Velocidad</button><button class="btn btn-dark btn-sm" data-action="askChip" data-q="Sesión de finalización">Finalización</button><button class="btn btn-dark btn-sm" data-action="askChip" data-q="Resumen del equipo">Resumen del equipo</button><button class="btn btn-dark btn-sm" data-action="askChip" data-q="¿Quién está lesionado?">Lesionados</button></div></div></div>
+ <form class="chatbar" id="chatForm"><input class="input" id="chatInput" placeholder="Ej. sesión de resistencia para sub-18…" aria-label="Mensaje" autocomplete="off"><button class="btn btn-primary" type="submit">Enviar</button></form>
+</div>
+</section>
+
+<section id="page-club" class="page" data-title="Personalizar">
+<div class="pagehead"><div><h1>Personalizar club</h1><p>Identidad que verás en tu panel.</p></div></div>
+<form class="panel" id="clubForm"><div class="formgrid">
+ <div class="field"><label for="clubInput">Nombre del club</label><input id="clubInput" maxlength="60" required></div>
+ <div class="field"><label for="coachInput">Entrenador</label><input id="coachInput" maxlength="60" required></div>
+ <div class="field"><label for="colorInput">Color principal</label><input id="colorInput" type="color"></div>
+ <div class="field"><label for="logoInput">URL del escudo (https)</label><input id="logoInput" type="url" placeholder="https://…"></div>
+ <div class="field full"><label for="logoFile">…o sube una imagen (PNG, JPG o WebP; se reduce y se guarda en tu navegador)</label><input id="logoFile" type="file" accept="image/png,image/jpeg,image/webp"></div>
+</div><button class="btn btn-primary" style="margin-top:15px" type="submit">Guardar identidad</button></form>
+</section>
+
+<section id="page-data" class="page" data-title="Datos y respaldo">
+<div class="pagehead"><div><h1>Datos y respaldo</h1><p>Tus datos viven en este navegador. Exporta respaldos con regularidad.</p></div></div>
+<div class="three">
+ <div class="panel"><h2>💾 Guardado local</h2><p class="muted" id="storageInfo" style="font-size:13px;line-height:1.6"></p><button class="btn btn-primary" style="margin-top:12px" data-action="saveNow">Guardar ahora</button></div>
+ <div class="panel"><h2>📤 Exportar / 📥 Importar</h2><p class="muted" style="font-size:13px;line-height:1.6">Respaldo completo en JSON: jugadores, evaluaciones, sesiones, partidos y jugadas.</p><p class="muted" id="lastExport" style="font-size:12px;margin-top:6px"></p><div class="toolbar" style="margin:12px 0 0"><button class="btn btn-dark" data-action="exportData">Exportar JSON</button><button class="btn btn-dark" data-action="importData">Importar JSON</button></div></div>
+ <div class="panel"><h2>🧹 Reiniciar</h2><p class="muted" style="font-size:13px;line-height:1.6">Empieza con tu club vacío o restablece los datos de demostración.</p><div class="toolbar" style="margin:12px 0 0"><button class="btn btn-dark" data-action="startEmpty">Empezar vacío</button><button class="btn btn-danger" data-action="resetDemo">Restablecer demo</button></div></div>
+</div>
+</section>
+</main></div></div>
+
+<!-- ============ DIÁLOGOS ============ -->
+<dialog id="loginDlg" aria-labelledby="loginTitle"><form class="modalbox" id="loginForm"><div class="modalhead"><h2 id="loginTitle">Comenzar con AK Sports Intelligence</h2><button class="close" type="button" data-action="closeDlg" aria-label="Cerrar">✕</button></div>
+<p class="muted" style="font-size:13px;margin-bottom:15px">Prototipo local: no hay cuentas ni contraseñas; tus datos se guardan solo en este navegador.</p>
+<div class="field"><label for="loginUser">Nombre del entrenador</label><input id="loginUser" maxlength="60"></div><div class="field" style="margin-top:10px"><label for="loginClub">Nombre del club</label><input id="loginClub" maxlength="60"></div>
+<div class="modalfoot"><button class="btn btn-primary" type="submit" style="width:100%">🚀 Entrar a la plataforma</button></div></form></dialog>
+
+<dialog id="playerDlg" aria-labelledby="playerTitle"><form class="modalbox" id="playerForm" autocomplete="off"><div class="modalhead"><h2 id="playerTitle">Nuevo jugador</h2><button class="close" type="button" data-action="closeDlg" aria-label="Cerrar">✕</button></div>
+<input type="hidden" id="pId"><div class="formgrid">
+<div class="field"><label for="pNum">Dorsal</label><input id="pNum" type="number" min="0" max="99" required></div>
+<div class="field"><label for="pName">Nombre</label><input id="pName" maxlength="60" required></div>
+<div class="field"><label for="pPos">Posición</label><select id="pPos"></select></div>
+<div class="field"><label for="pAge">Edad</label><input id="pAge" type="number" min="5" max="60" required></div>
+<div class="field"><label for="pStatus">Estado</label><select id="pStatus"></select></div>
+<div class="field full"><label for="pNotes">Notas</label><textarea id="pNotes" maxlength="500"></textarea></div></div>
+<div class="modalfoot"><button class="btn btn-dark" type="button" data-action="closeDlg">Cancelar</button><button class="btn btn-primary" type="submit">Guardar jugador</button></div></form></dialog>
+
+<dialog id="evalDlg" aria-labelledby="evalTitle"><form class="modalbox" id="evalForm"><div class="modalhead"><h2 id="evalTitle">Nueva evaluación</h2><button class="close" type="button" data-action="closeDlg" aria-label="Cerrar">✕</button></div>
+<div class="formgrid"><div class="field"><label for="evPlayer">Jugador</label><select id="evPlayer"></select></div><div class="field"><label for="evDate">Fecha</label><input id="evDate" type="date" required></div>
+<div class="field"><label for="evTec">Técnica <output>70</output></label><input id="evTec" type="range" min="0" max="100" value="70"></div>
+<div class="field"><label for="evTac">Táctica <output>70</output></label><input id="evTac" type="range" min="0" max="100" value="70"></div>
+<div class="field"><label for="evFis">Físico <output>70</output></label><input id="evFis" type="range" min="0" max="100" value="70"></div>
+<div class="field"><label for="evPsi">Psicológico <output>70</output></label><input id="evPsi" type="range" min="0" max="100" value="70"></div></div>
+<div class="modalfoot"><button class="btn btn-dark" type="button" data-action="closeDlg">Cancelar</button><button class="btn btn-primary" type="submit">Guardar evaluación</button></div></form></dialog>
+
+<dialog id="trainingDlg" aria-labelledby="trainTitle"><form class="modalbox" id="trainingForm" autocomplete="off"><div class="modalhead"><h2 id="trainTitle">Nueva sesión</h2><button class="close" type="button" data-action="closeDlg" aria-label="Cerrar">✕</button></div>
+<input type="hidden" id="tId"><div class="formgrid">
+<div class="field"><label for="tName">Nombre</label><input id="tName" maxlength="80" required></div><div class="field"><label for="tDate">Fecha</label><input id="tDate" type="date" required></div>
+<div class="field"><label for="tDur">Duración (min)</label><input id="tDur" type="number" min="5" max="300" required></div><div class="field"><label for="tRpe">RPE planeado (1-10)</label><input id="tRpe" type="number" min="1" max="10" required></div>
+<div class="field"><label for="tCat">Categoría</label><input id="tCat" maxlength="30" placeholder="Sub-18"></div><div class="field"><label for="tObj">Objetivo</label><input id="tObj" maxlength="160"></div>
+<div class="field full"><label for="tBlocks">Bloques (uno por línea)</label><textarea id="tBlocks" maxlength="1500" placeholder="10' Activación&#10;30' Juego reducido"></textarea></div></div>
+<div class="modalfoot"><button class="btn btn-dark" type="button" data-action="closeDlg">Cancelar</button><button class="btn btn-primary" type="submit">Guardar sesión</button></div></form></dialog>
+
+<dialog id="matchDlg" aria-labelledby="matchTitle"><form class="modalbox" id="matchForm" autocomplete="off"><div class="modalhead"><h2 id="matchTitle">Registrar partido</h2><button class="close" type="button" data-action="closeDlg" aria-label="Cerrar">✕</button></div>
+<input type="hidden" id="mId"><div class="formgrid">
+<div class="field"><label for="mDate">Fecha</label><input id="mDate" type="date" required></div><div class="field"><label for="mRival">Rival</label><input id="mRival" maxlength="60" required></div>
+<div class="field"><label for="mVenue">Sede</label><select id="mVenue"><option value="Local">Local</option><option value="Visitante">Visitante</option><option value="Neutral">Neutral</option></select></div><div class="field"><label for="mComp">Competición</label><input id="mComp" maxlength="40" placeholder="Liga"></div>
+<div class="field"><label for="mGf">Goles a favor</label><input id="mGf" type="number" min="0" max="99" required></div><div class="field"><label for="mGa">Goles en contra</label><input id="mGa" type="number" min="0" max="99" required></div>
+<div class="field full"><label for="mNotes">Notas</label><textarea id="mNotes" maxlength="500"></textarea></div></div>
+<div class="modalfoot"><button class="btn btn-dark" type="button" data-action="closeDlg">Cancelar</button><button class="btn btn-primary" type="submit">Guardar partido</button></div></form></dialog>
+
+<dialog id="playDlg" aria-labelledby="playTitle"><form class="modalbox" id="playForm" autocomplete="off"><div class="modalhead"><h2 id="playTitle">Guardar jugada</h2><button class="close" type="button" data-action="closeDlg" aria-label="Cerrar">✕</button></div>
+<div class="field"><label for="playName">Nombre de la jugada</label><input id="playName" maxlength="60" required></div>
+<div class="modalfoot"><button class="btn btn-dark" type="button" data-action="closeDlg">Cancelar</button><button class="btn btn-primary" type="submit">Guardar</button></div></form></dialog>
+
+<dialog id="confirmDlg" aria-labelledby="confirmTitle"><form class="modalbox" method="dialog"><div class="modalhead"><h2 id="confirmTitle">Confirmar</h2></div><p id="confirmMsg" class="muted" style="line-height:1.6"></p>
+<div class="modalfoot"><button class="btn btn-dark" value="no">Cancelar</button><button class="btn btn-danger" value="yes" id="confirmOk">Continuar</button></div></form></dialog>
+
+<dialog id="profileDlg" aria-labelledby="profileName"><div class="modalbox wide" id="profileBody"></div></dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/i18n.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
