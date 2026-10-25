@@ -77,12 +77,12 @@
 </div></div></section>
 
 <section id="planes" class="section"><div class="container">
-<h2>Planes para crecer contigo</h2><p class="lead">Precios de referencia del prototipo. En esta versión todas las funciones están abiertas para que puedas probarlas.</p>
+<h2>Planes para crecer contigo</h2><p class="lead">Precios de referencia del prototipo. Durante los 7 días de prueba puedes usar todos los deportes; después, tu plan define cuáles tienes.</p>
 <div class="pricing">
-  <div class="price"><h3>Free Trial</h3><div class="amount">$0</div><ul><li>7 días de prueba</li><li>Todas las funciones demo</li><li>Datos locales</li></ul><button class="btn btn-dark" data-action="openLogin" data-plan="Free Trial">Probar</button></div>
-  <div class="price featured"><h3 style="color:var(--green)">Premium</h3><div class="amount">$399 <small>MXN/mes</small></div><ul><li>Plantilla y evaluaciones</li><li>Entrenamientos y carga</li><li>Partidos y estadísticas</li></ul><button class="btn btn-primary" data-action="openLogin" data-plan="Premium">Elegir Premium</button></div>
-  <div class="price"><h3 style="color:var(--blue)">Pro</h3><div class="amount">$799 <small>MXN/mes</small></div><ul><li>Todo Premium</li><li>Asistente de sesiones</li><li>Informes imprimibles</li></ul><button class="btn btn-blue" data-action="openLogin" data-plan="Pro">Elegir Pro</button></div>
-  <div class="price"><h3 style="color:var(--gold)">Ultra Pro</h3><div class="amount">$1,399 <small>MXN/mes</small></div><ul><li>Todo Pro</li><li>Multi-club (próximamente)</li><li>Sincronización en la nube (próximamente)</li></ul><button class="btn" style="background:var(--gold);color:#171000" data-action="openLogin" data-plan="Ultra Pro">Elegir Ultra</button></div>
+  <div class="price"><h3>Free Trial</h3><div class="amount">$0</div><ul><li>7 días de prueba</li><li>Todos los deportes y funciones</li><li>Después: solo fútbol</li><li>Datos locales</li></ul><button class="btn btn-dark" data-action="openLogin" data-plan="Free Trial">Probar</button></div>
+  <div class="price featured"><h3 style="color:var(--green)">Premium</h3><div class="amount">$399 <small>MXN/mes</small></div><ul><li>Plantilla y evaluaciones</li><li>Entrenamientos y carga</li><li>Partidos y estadísticas</li><li>Pizarra: fútbol, baloncesto y voleibol</li></ul><button class="btn btn-primary" data-action="openLogin" data-plan="Premium">Elegir Premium</button></div>
+  <div class="price"><h3 style="color:var(--blue)">Pro</h3><div class="amount">$799 <small>MXN/mes</small></div><ul><li>Todo Premium</li><li>+ Balonmano y fútbol americano</li><li>Asistente de sesiones</li><li>Informes imprimibles</li></ul><button class="btn btn-blue" data-action="openLogin" data-plan="Pro">Elegir Pro</button></div>
+  <div class="price"><h3 style="color:var(--gold)">Ultra Pro</h3><div class="amount">$1,399 <small>MXN/mes</small></div><ul><li>Todo Pro</li><li>+ Rugby, hockey y fútbol sala</li><li>Multi-club (próximamente)</li><li>Sincronización en la nube (próximamente)</li></ul><button class="btn" style="background:var(--gold);color:#171000" data-action="openLogin" data-plan="Ultra Pro">Elegir Ultra</button></div>
 </div>
 <p class="note">Los pagos y la sincronización en la nube requieren un servidor y no están activos en esta versión.</p>
 </div></section>
@@ -162,6 +162,8 @@
   <svg class="drawlayer" id="drawlayer" viewBox="0 0 105 68" aria-label="Capa de dibujo"><g id="strokes"></g></svg>
  </div>
  <div class="panel tools">
+  <h3>Deporte</h3>
+  <select id="sportSel" class="input" aria-label="Deporte"></select>
   <h3>Modo</h3>
   <button class="btn btn-dark" data-action="setMode" data-mode="move" aria-pressed="true">✋ Mover fichas</button>
   <button class="btn btn-dark" data-action="setMode" data-mode="free" aria-pressed="false">✏️ Dibujar libre</button>
