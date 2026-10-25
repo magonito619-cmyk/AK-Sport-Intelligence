@@ -15,6 +15,38 @@ const FORMS={
  "4-2-3-1":[[1,6,50],[2,22,85],[4,22,62],[5,22,38],[3,22,15],[6,38,62],[8,38,38],[7,56,82],[10,56,50],[11,56,18],[9,74,50]]
 };
 
+/* ===================== Deportes y planes ===================== */
+const SPORTS={
+ futbol:{name:"Fútbol",min:0,forms:FORMS},
+ baloncesto:{name:"Baloncesto",min:1,forms:{"1-3-1":[[1,38,50],[2,26,18],[3,22,50],[4,26,82],[5,10,50]],"2-1-2":[[1,36,32],[2,36,68],[3,24,50],[4,12,30],[5,12,70]],"2-3":[[1,36,35],[2,36,65],[3,16,15],[4,14,50],[5,16,85]],"4-1":[[1,38,50],[2,22,12],[3,22,38],[4,22,62],[5,22,88]]}},
+ voleibol:{name:"Voleibol",min:1,forms:{Base:[[1,26,70],[2,45,70],[3,45,50],[4,45,30],[5,26,30],[6,26,50]],W:[[1,24,66],[2,38,72],[3,45,50],[4,38,28],[5,24,34],[6,28,50]],U:[[1,24,70],[2,45,66],[3,45,50],[4,45,34],[5,24,30],[6,22,50]]}},
+ balonmano:{name:"Balonmano",min:2,forms:{"6-0":[[1,5,50],[2,20,14],[3,20,28],[4,20,42],[5,20,58],[6,20,72],[7,20,86]],"5-1":[[1,5,50],[2,20,18],[3,20,34],[4,20,50],[5,20,66],[6,20,82],[7,34,50]],"3-2-1":[[1,5,50],[2,18,28],[3,18,50],[4,18,72],[5,28,38],[6,28,62],[7,38,50]]}},
+ americano:{name:"Fútbol americano",min:2,forms:{"I-Form":[[1,38,50],[2,44,50],[3,44,43],[4,44,57],[5,44,36],[6,44,64],[7,44,20],[8,44,80],[9,32,50],[10,26,50],[11,38,30]],Shotgun:[[1,34,50],[2,44,50],[3,44,43],[4,44,57],[5,44,36],[6,44,64],[7,44,18],[8,44,82],[9,36,38],[10,44,28],[11,44,72]],"4-3":[[1,46,30],[2,46,43],[3,46,57],[4,46,70],[5,38,35],[6,38,50],[7,38,65],[8,26,20],[9,26,80],[10,22,40],[11,22,60]]}},
+ rugby:{name:"Rugby",min:3,forms:{Base:[[1,44,40],[2,44,50],[3,44,60],[4,40,45],[5,40,55],[6,38,35],[7,38,65],[8,36,50],[9,32,50],[10,26,45],[11,18,12],[12,22,38],[13,20,32],[14,18,88],[15,10,50]],Open:[[1,44,18],[2,44,50],[3,44,82],[4,40,32],[5,40,68],[6,36,12],[7,36,88],[8,36,50],[9,30,50],[10,22,44],[11,12,10],[12,16,32],[13,14,56],[14,12,90],[15,6,50]]}},
+ hockey:{name:"Hockey",min:3,forms:{"2-1-2":[[1,6,50],[2,18,35],[3,18,65],[4,32,50],[5,44,30],[6,44,70]],"1-2-2":[[1,6,50],[2,18,50],[3,32,35],[4,32,65],[5,44,30],[6,44,70]]}},
+ futsal:{name:"Fútbol sala",min:3,forms:{"2-2":[[1,6,50],[2,22,30],[3,22,70],[4,40,30],[5,40,70]],"3-1":[[1,6,50],[2,20,22],[3,20,78],[4,28,50],[5,44,50]],"4-0":[[1,6,50],[2,24,15],[3,24,38],[4,24,62],[5,24,85]]}}
+};
+const PLAN_NAMES=["Free","Premium","Pro","Ultra Pro"],PLAN_RANK={"Free Trial":0,Premium:1,Pro:2,"Ultra Pro":3};
+const BALLS={baloncesto:"🏀",voleibol:"🏐",americano:"🏈",rugby:"🏉",hockey:"⚫"};
+const trialOn=()=>state.plan==="Free Trial"&&trialDays()>0;
+const sportAllowed=sp=>!!SPORTS[sp]&&(trialOn()||(PLAN_RANK[state.plan]??0)>=SPORTS[sp].min);
+const sportName=sp=>tr(SPORTS[SPORTS[sp]?sp:"futbol"].name);
+const LN='stroke="rgba(255,255,255,.85)" stroke-width=".35" fill="none"',pbg=c=>`<rect width="105" height="68" fill="${c}"/>`;
+const hall=(out,floor,mid)=>pbg(out)+`<rect x="2" y="8.75" width="101" height="50.5" fill="${floor}"/><g ${LN}><rect x="2" y="8.75" width="101" height="50.5"/><line x1="52.5" y1="8.75" x2="52.5" y2="59.25"/>${mid}<path d="M2 19A15 15 0 0 1 17 34A15 15 0 0 1 2 49"/><path d="M103 19A15 15 0 0 0 88 34A15 15 0 0 0 103 49"/></g>`;
+const PITCH={
+ futbol:()=>pitchFutbol(),
+ baloncesto:()=>pbg("#7a4a1e")+`<rect x="2" y="2" width="101" height="64" fill="#c98a4b"/><g ${LN}><rect x="2" y="2" width="101" height="64"/><line x1="52.5" y1="2" x2="52.5" y2="66"/><circle cx="52.5" cy="34" r="6"/><rect x="2" y="24" width="19" height="20"/><rect x="84" y="24" width="19" height="20"/><circle cx="21" cy="34" r="6"/><circle cx="84" cy="34" r="6"/><path d="M2 8H13A26 26 0 0 1 13 60H2"/><path d="M103 8H92A26 26 0 0 0 92 60H103"/><circle cx="5.5" cy="34" r=".8"/><circle cx="99.5" cy="34" r=".8"/></g>`,
+ voleibol:()=>pbg("#17476e")+`<rect x="17.5" y="16.5" width="70" height="35" fill="#d9894a"/><g ${LN}><rect x="17.5" y="16.5" width="70" height="35"/><line x1="40.8" y1="16.5" x2="40.8" y2="51.5"/><line x1="64.2" y1="16.5" x2="64.2" y2="51.5"/></g><line x1="52.5" y1="13" x2="52.5" y2="55" stroke="#fff" stroke-width=".8"/>`,
+ balonmano:()=>hall("#1f4f8f","#d99c5b",`<path d="M2 11.3A22.7 22.7 0 0 1 24.7 34A22.7 22.7 0 0 1 2 56.7" stroke-dasharray="1.2 1"/><path d="M103 11.3A22.7 22.7 0 0 0 80.3 34A22.7 22.7 0 0 0 103 56.7" stroke-dasharray="1.2 1"/>`),
+ futsal:()=>hall("#0f3d52","#2a86a8",`<circle cx="52.5" cy="34" r="7.6"/><circle cx="14" cy="34" r=".5" fill="#fff"/><circle cx="91" cy="34" r=".5" fill="#fff"/>`),
+ americano:()=>{let s=pbg("#0d5a33")+`<rect x="2" y="2" width="8.6" height="64" fill="#7a1f1f" opacity=".6"/><rect x="94.4" y="2" width="8.6" height="64" fill="#1f3a7a" opacity=".6"/><g ${LN}><rect x="2" y="2" width="101" height="64"/>`;for(let i=0;i<=10;i++){const x=(10.6+i*8.38).toFixed(2);s+=`<line x1="${x}" y1="2" x2="${x}" y2="66"/>`}return s+"</g>"},
+ rugby:()=>pbg("#0e5f35")+`<g ${LN}><rect x="2" y="2" width="101" height="64"/>${[10,95,52.5,28.7,76.3].map(x=>`<line x1="${x}" y1="2" x2="${x}" y2="66"/>`).join("")}<line x1="44" y1="2" x2="44" y2="66" stroke-dasharray="1.5 1.5"/><line x1="61" y1="2" x2="61" y2="66" stroke-dasharray="1.5 1.5"/></g>`,
+ hockey:()=>pbg("#0c2233")+`<rect x="2" y="8" width="101" height="52" rx="14" fill="#d6edf5"/><g fill="none"><line x1="52.5" y1="8" x2="52.5" y2="60" stroke="#c0392b" stroke-width=".7"/><line x1="35.7" y1="8" x2="35.7" y2="60" stroke="#2563eb" stroke-width=".7"/><line x1="69.3" y1="8" x2="69.3" y2="60" stroke="#2563eb" stroke-width=".7"/><line x1="9" y1="9" x2="9" y2="59" stroke="#c0392b" stroke-width=".3"/><line x1="96" y1="9" x2="96" y2="59" stroke="#c0392b" stroke-width=".3"/><circle cx="52.5" cy="34" r="7.5" stroke="#2563eb" stroke-width=".35"/>${[[24,22],[24,46],[81,22],[81,46]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="6" stroke="#c0392b" stroke-width=".3"/>`).join("")}</g>`
+};
+const pitchSVG=sp=>(PITCH[sp]||PITCH.futbol)();
+function stashBoard(){state.boards[state.board.sp]=clone(state.board)}
+function setSport(sp){stashBoard();state.board=normBoard(state.boards[sp]||{sp});renderTactics();persist()}
+
 /* ===================== Utilidades ===================== */
 const $=(s,r=document)=>r.querySelector(s);
 const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
@@ -43,21 +75,22 @@ const store={ok:true,mem:{},
 };
 
 /* ===================== Modelo de datos ===================== */
-function buildTokens(hf,af){
- const t=[];
- (FORMS[hf]||FORMS["4-4-2"]).forEach((f,i)=>t.push({id:"h"+i,type:"home",label:String(f[0]),x:f[1],y:f[2]}));
- (FORMS[af]||FORMS["4-4-2"]).forEach((f,i)=>t.push({id:"a"+i,type:"away",label:String(f[0]),x:100-f[1],y:100-f[2]}));
+function buildTokens(hf,af,sp){
+ const F=(SPORTS[sp]||SPORTS.futbol).forms,k0=Object.keys(F)[0],t=[];
+ (F[hf]||F[k0]).forEach((f,i)=>t.push({id:"h"+i,type:"home",label:String(f[0]),x:f[1],y:f[2]}));
+ (F[af]||F[k0]).forEach((f,i)=>t.push({id:"a"+i,type:"away",label:String(f[0]),x:100-f[1],y:100-f[2]}));
  return t;
 }
 function normKF(x){return Array.isArray(x)?x.slice(0,80).map(o=>({id:str(o&&o.id),x:clamp(toNum(o&&o.x,50),0,100),y:clamp(toNum(o&&o.y,50),0,100)})):null}
 function normBoard(b){
  b=b&&typeof b==="object"?b:{};
- const hf=FORMS[b.hf]?b.hf:"4-4-2",af=FORMS[b.af]?b.af:"4-4-2",tid=uniq();
+ const sp=SPORTS[b.sp]?b.sp:"futbol",F=SPORTS[sp].forms,k0=Object.keys(F)[0],hf=F[b.hf]?b.hf:k0,af=F[b.af]?b.af:k0,tid=uniq();
  let tokens=arr(b.tokens).filter(t=>t&&TOKEN_TYPES.includes(t.type)).slice(0,80).map(t=>({id:tid(t.id),type:t.type,label:str(t.label).slice(0,3),x:clamp(toNum(t.x,50),0,100),y:clamp(toNum(t.y,50),0,100)}));
- if(!tokens.some(t=>t.type==="home"))tokens=buildTokens(hf,af).concat(tokens.filter(t=>t.type==="ball"||t.type==="cone"));
+ if(!tokens.some(t=>t.type==="home"))tokens=buildTokens(hf,af,sp).concat(tokens.filter(t=>t.type==="ball"||t.type==="cone"));
  const strokes=arr(b.strokes).slice(0,300).map(s=>({t:s&&s.t==="arrow"?"arrow":"free",c:hex(s&&s.c)?s.c:"#f5b942",pts:arr(s&&s.pts).slice(0,800).map(p=>[clamp(toNum(p&&p[0]),0,1),clamp(toNum(p&&p[1]),0,1)])})).filter(s=>s.pts.length>0);
- return{hf,af,tokens,strokes,rivals:b.rivals!==false,kf:{a:normKF(b.kf&&b.kf.a),b:normKF(b.kf&&b.kf.b),m:arr(b.kf&&b.kf.m).slice(0,20).map(normKF).filter(Boolean)}};
+ return{sp,hf,af,tokens,strokes,rivals:b.rivals!==false,kf:{a:normKF(b.kf&&b.kf.a),b:normKF(b.kf&&b.kf.b),m:arr(b.kf&&b.kf.m).slice(0,20).map(normKF).filter(Boolean)}};
 }
+function normBoards(o){o=o&&typeof o==="object"?o:{};const r={};Object.keys(o).forEach(k=>{if(SPORTS[k])r[k]=normBoard({...o[k],sp:k})});return r}
 function normalize(s){
  s=s&&typeof s==="object"?s:{};
  const pid=uniq(),players=arr(s.players).filter(p=>p&&typeof p==="object").map(p=>({id:pid(p.id),num:clamp(Math.round(toNum(p.num)),0,99),name:str(p.name,"Jugador").slice(0,60),pos:POSITIONS.includes(p.pos)?p.pos:"Mediocampista",age:clamp(Math.round(toNum(p.age,18)),5,60),status:STATUSES.includes(p.status)?p.status:"Activo",notes:str(p.notes).slice(0,500)}));
@@ -66,7 +99,7 @@ function normalize(s){
  const trid=uniq(),trainings=arr(s.trainings).filter(t=>t&&typeof t==="object").map(t=>({id:trid(t.id),name:str(t.name,"Sesión").slice(0,80),date:validDate(t.date)?t.date:today(),duration:clamp(Math.round(toNum(t.duration,60)),5,300),rpe:clamp(Math.round(toNum(t.rpe,5)),1,10),category:str(t.category,"General").slice(0,30),objective:str(t.objective).slice(0,160),blocks:str(t.blocks).slice(0,1500)}));
  const mid=uniq(),matches=arr(s.matches).filter(m=>m&&typeof m==="object").map(m=>({id:mid(m.id),date:validDate(m.date)?m.date:today(),rival:str(m.rival,"Rival").slice(0,60),venue:["Local","Visitante","Neutral"].includes(m.venue)?m.venue:"Local",gf:clamp(Math.round(toNum(m.gf)),0,99),ga:clamp(Math.round(toNum(m.ga)),0,99),comp:str(m.comp,"Amistoso").slice(0,40),notes:str(m.notes).slice(0,500)}));
  const plid=uniq(),plays=arr(s.plays).slice(0,50).filter(p=>p&&typeof p==="object").map(p=>({id:plid(p.id),name:str(p.name,"Jugada").slice(0,60),created:validDate(p.created)?p.created:today(),...normBoard(p)}));
- return{v:SCHEMA,user:str(s.user,"Entrenador").slice(0,60),club:str(s.club,"Mi Club").slice(0,60),color:hex(s.color)?s.color:"#19d391",logo:safeLogo(s.logo),plan:str(s.plan,"Free Trial").slice(0,20),trialStart:toNum(s.trialStart,Date.now()),demo:!!s.demo,players,evaluations,trainings,matches,plays,board:normBoard(s.board)};
+ return{v:SCHEMA,user:str(s.user,"Entrenador").slice(0,60),club:str(s.club,"Mi Club").slice(0,60),color:hex(s.color)?s.color:"#19d391",logo:safeLogo(s.logo),plan:str(s.plan,"Free Trial").slice(0,20),trialStart:toNum(s.trialStart,Date.now()),demo:!!s.demo,players,evaluations,trainings,matches,plays,board:normBoard(s.board),boards:normBoards(s.boards)};
 }
 function migrateV3(o){
  const players=arr(o.players).filter(p=>p&&typeof p==="object").map(p=>({id:str(p.id,uid()),num:p.num,name:p.name,pos:p.pos,age:p.age,status:p.status}));
@@ -348,12 +381,12 @@ function pickFile(accept,cb){const i=document.createElement("input");i.type="fil
 
 /* ===================== Pizarra táctica ===================== */
 const tac=()=>state.board;
-function pitchSVG(){
+function pitchFutbol(){
  let s="";for(let i=0;i<10;i++)s+=`<rect x="${i*10.5}" y="0" width="10.5" height="68" fill="${i%2?"#0f5d38":"#11663f"}"/>`;
  const L='stroke="rgba(255,255,255,.8)" stroke-width=".35" fill="none"';
  return s+`<g ${L}><rect x="2" y="2" width="101" height="64"/><line x1="52.5" y1="2" x2="52.5" y2="66"/><circle cx="52.5" cy="34" r="9.15"/><rect x="2" y="13.84" width="16.5" height="40.32"/><rect x="2" y="24.84" width="5.5" height="18.32"/><rect x="86.5" y="13.84" width="16.5" height="40.32"/><rect x="97.5" y="24.84" width="5.5" height="18.32"/></g><circle cx="52.5" cy="34" r=".6" fill="#fff"/>`;
 }
-const tokenText=t=>t.type==="ball"?"⚽":t.type==="cone"?"🔶":esc(t.label);
+const tokenText=t=>t.type==="ball"?(BALLS[tac().sp]||"⚽"):t.type==="cone"?"🔶":esc(t.label);
 const tokenAria=t=>t.type==="home"?"Jugador local "+t.label:t.type==="away"?"Jugador rival "+t.label:t.type==="ball"?"Balón":"Cono";
 function renderBoard(){
  const b=tac();
@@ -371,11 +404,14 @@ function renderStrokes(){
  }).join("");
 }
 function renderPlays(){
- $("#playsList").innerHTML=state.plays.length?state.plays.map(p=>`<div class="playitem"><span><b>${esc(p.name)}</b> <span class="muted">· ${esc(p.hf)} vs ${esc(p.af)} · ${fmtDate(p.created)}${p.kf&&p.kf.a&&p.kf.b?" · con animación":""}</span></span><span class="rowactions"><button class="btn btn-dark btn-sm" data-action="loadPlay" data-id="${esc(p.id)}">Cargar</button><button class="btn btn-dark btn-sm" data-action="deletePlay" data-id="${esc(p.id)}" aria-label="Eliminar jugada">🗑️</button></span></div>`).join(""):empty("Aún no has guardado jugadas.");
+ $("#playsList").innerHTML=state.plays.length?state.plays.map(p=>`<div class="playitem"><span><b>${esc(p.name)}</b> <span class="muted">· ${esc(sportName(p.sp))} · ${esc(p.hf)} vs ${esc(p.af)} · ${fmtDate(p.created)}${p.kf&&p.kf.a&&p.kf.b?" · con animación":""}</span></span><span class="rowactions"><button class="btn btn-dark btn-sm" data-action="loadPlay" data-id="${esc(p.id)}">Cargar</button><button class="btn btn-dark btn-sm" data-action="deletePlay" data-id="${esc(p.id)}" aria-label="Eliminar jugada">🗑️</button></span></div>`).join(""):empty("Aún no has guardado jugadas.");
 }
 function renderTactics(){
  initTactics();
- const b=tac();$("#formHome").value=b.hf;$("#formAway").value=b.af;
+ if(!sportAllowed(tac().sp)){stashBoard();state.board=normBoard(state.boards.futbol||{sp:"futbol"})}
+ const b=tac(),fo=Object.keys(SPORTS[b.sp].forms).map(f=>`<option value="${f}">${f}</option>`).join("");
+ $("#pitch").innerHTML=pitchSVG(b.sp);$("#formHome").innerHTML=fo;$("#formAway").innerHTML=fo;$("#formHome").value=b.hf;$("#formAway").value=b.af;
+ $("#sportSel").innerHTML=Object.keys(SPORTS).map(k=>`<option value="${k}">${esc(tr(SPORTS[k].name))}${sportAllowed(k)?"":" 🔒"}</option>`).join("");$("#sportSel").value=b.sp;
  $("#board").classList.toggle("mode-draw",ui.mode!=="move");
  $$('[data-action="setMode"]').forEach(x=>x.setAttribute("aria-pressed",String(x.dataset.mode===ui.mode)));
  $$('[data-action="setColor"]').forEach(x=>x.setAttribute("aria-pressed",String(x.dataset.c===ui.color)));
@@ -408,7 +444,8 @@ function initTactics(){
  draw.addEventListener("pointermove",e=>{if(!cur)return;const p=pt(e);if(cur.t==="arrow")cur.pts=[cur.pts[0],p];else{const l=cur.pts[cur.pts.length-1];if(Math.hypot(p[0]-l[0],p[1]-l[1])>.004)cur.pts.push(p)}renderStrokes()});
  const stop=()=>{if(cur){if(cur.pts.length<2&&cur.t==="arrow")tac().strokes.pop();cur=null;renderStrokes();persist()}};
  draw.addEventListener("pointerup",stop);draw.addEventListener("pointercancel",stop);
- const regen=()=>{const b=tac();b.hf=$("#formHome").value;b.af=$("#formAway").value;b.tokens=buildTokens(b.hf,b.af).concat(b.tokens.filter(t=>t.type==="ball"||t.type==="cone"));b.kf={a:null,b:null,m:[]};renderBoard();persist()};
+ const regen=()=>{const b=tac();b.hf=$("#formHome").value;b.af=$("#formAway").value;b.tokens=buildTokens(b.hf,b.af,b.sp).concat(b.tokens.filter(t=>t.type==="ball"||t.type==="cone"));b.kf={a:null,b:null,m:[]};renderBoard();persist()};
+ $("#sportSel").addEventListener("change",e=>{const sp=e.target.value;if(!sportAllowed(sp)){toast(tr("Disponible desde el plan ")+PLAN_NAMES[SPORTS[sp].min]);e.target.value=tac().sp;return}setSport(sp)});
  $("#formHome").addEventListener("change",regen);$("#formAway").addEventListener("change",regen);
 }
 function removeToken(id){const b=tac();b.tokens=b.tokens.filter(t=>t.id!==id);renderBoard();persist();toast("Material quitado")}
@@ -493,13 +530,13 @@ const actions={
  clearStrokes(){if(!tac().strokes.length)return;const s=clone(tac().strokes);tac().strokes=[];renderStrokes();persist();toast("Dibujo borrado",{undo:()=>{tac().strokes=s;renderStrokes();persist()}})},
  toggleRivals(){tac().rivals=!tac().rivals;renderBoard();persist()},
  addGear(d){tac().tokens.push({id:uid(),type:d.type,label:"",x:50,y:50});renderBoard();persist()},
- resetBoard(){const b=tac();b.tokens=buildTokens(b.hf,b.af);b.kf={a:null,b:null,m:[]};renderBoard();persist();toast("Posiciones iniciales")},
+ resetBoard(){const b=tac();b.tokens=buildTokens(b.hf,b.af,b.sp);b.kf={a:null,b:null,m:[]};renderBoard();persist();toast("Posiciones iniciales")},
  fixStart(){const k=tac().kf;k.a=snapshotPositions();k.m=[];k.b=null;persist();updateAnimInfo();toast("Inicio fijado: mueve las fichas, agrega pasos y fija el final")},addStep(){const k=tac().kf;if(!k.a){toast("Primero fija el inicio");return}k.m=k.m||[];if(k.m.length>=20){toast("Máximo 20 pasos");return}k.m.push(snapshotPositions());persist();updateAnimInfo();toast("Paso "+k.m.length+" agregado")},
  fixEnd(){if(!tac().kf.a){toast("Primero fija el inicio");return}tac().kf.b=snapshotPositions();persist();updateAnimInfo();toast("Final fijado: ya puedes reproducir")},
  playAnim(){playAnim()},
  gotoStart(){if(!tac().kf.a){toast("Aún no fijas un inicio");return}applyPositions(tac().kf.a)},
  savePlay(){$("#playName").value="";openDlg("playDlg");setTimeout(()=>$("#playName").focus(),0)},
- loadPlay(d){const p=state.plays.find(x=>x.id===d.id);if(!p)return;const{hf,af,tokens,strokes,rivals,kf}=clone(p);state.board=normBoard({hf,af,tokens,strokes,rivals,kf});renderTactics();persist();toast("Jugada «"+p.name+"» cargada")},
+ loadPlay(d){const p=state.plays.find(x=>x.id===d.id);if(!p)return;const sp=SPORTS[p.sp]?p.sp:"futbol";if(!sportAllowed(sp)){toast(tr("Disponible desde el plan ")+PLAN_NAMES[SPORTS[sp].min]);return}const{hf,af,tokens,strokes,rivals,kf}=clone(p);stashBoard();state.board=normBoard({sp,hf,af,tokens,strokes,rivals,kf});renderTactics();persist();toast("Jugada «"+p.name+"» cargada")},
  deletePlay(d){destructive(()=>{state.plays=state.plays.filter(p=>p.id!==d.id)},"Jugada eliminada")},
  askChip(d){sendMessage(d.q)},
  saveAiSession(d){const s=ui.aiList[Number(d.i)];if(!s)return;state.trainings.push({id:uid(),name:s.name,date:today(),duration:s.duration,rpe:s.rpe,category:s.category,objective:s.objective,blocks:s.blocks.join("\n")});persist();toast("Sesión guardada en Entrenamientos")}
@@ -551,7 +588,7 @@ $("#matchForm").addEventListener("submit",e=>{
 $("#playForm").addEventListener("submit",e=>{
  e.preventDefault();
  const name=str($("#playName").value,"Jugada").slice(0,60),b=clone(tac());
- state.plays.unshift({id:uid(),name,created:today(),hf:b.hf,af:b.af,tokens:b.tokens,strokes:b.strokes,rivals:b.rivals,kf:b.kf});
+ state.plays.unshift({id:uid(),name,created:today(),hf:b.hf,af:b.af,tokens:b.tokens,strokes:b.strokes,rivals:b.rivals,kf:b.kf,sp:b.sp});
  state.plays=state.plays.slice(0,50);closeDlg("playDlg");commit();toast("Jugada guardada");
 });
 $("#clubForm").addEventListener("submit",e=>{

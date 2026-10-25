@@ -44,7 +44,7 @@ const EN={
 "Sin datos":"No data","Sin jugadores evaluados.":"No evaluated players.","Aún no has guardado jugadas.":"You haven't saved any plays yet.","Todavía no hay evaluaciones.":"There are no evaluations yet.","Sin objetivo definido":"No objective set",
 "Jugador guardado":"Player saved","Evaluación guardada":"Evaluation saved","Sesión guardada":"Session saved","Partido guardado":"Match saved","Jugada guardada":"Play saved","Identidad actualizada":"Identity updated","Datos guardados":"Data saved","Respaldo descargado":"Backup downloaded","CSV descargado":"CSV downloaded",
 "Evaluación eliminada":"Evaluation deleted","Sesión eliminada":"Session deleted","Partido eliminado":"Match deleted","Jugada eliminada":"Play deleted","Primero agrega un jugador":"Add a player first","Material quitado":"Equipment removed","Posiciones iniciales":"Initial positions",
-"Plan seleccionado: ":"Plan selected: ","➕ Agregar paso intermedio":"➕ Add intermediate step","Inicio":"Start","Pasos":"Steps","Final":"End","Fija primero el inicio y el final":"Set the start and end first","Primero fija el inicio":"Set the start first","Final fijado: ya puedes reproducir":"End set: you can now play","/mes":"/mo","dorsal":"number","nombre":"name","posicion":"position","edad":"age","rendimiento":"performance",
+"Plan seleccionado: ":"Plan selected: ","Disponible desde el plan ":"Available from plan ","Deporte":"Sport","Fútbol":"Football","Baloncesto":"Basketball","Voleibol":"Volleyball","Balonmano":"Handball","Fútbol americano":"American football","Fútbol sala":"Futsal","Todos los deportes y funciones":"All sports and features","Después: solo fútbol":"Afterwards: football only","Pizarra: fútbol, baloncesto y voleibol":"Board: football, basketball and volleyball","+ Balonmano y fútbol americano":"+ Handball and American football","+ Rugby, hockey y fútbol sala":"+ Rugby, hockey and futsal","Precios de referencia del prototipo. Durante los 7 días de prueba puedes usar todos los deportes; después, tu plan define cuáles tienes.":"Prototype reference prices. During the 7-day trial you can use every sport; afterwards your plan decides which ones you have.","➕ Agregar paso intermedio":"➕ Add intermediate step","Inicio":"Start","Pasos":"Steps","Final":"End","Fija primero el inicio y el final":"Set the start and end first","Primero fija el inicio":"Set the start first","Final fijado: ya puedes reproducir":"End set: you can now play","/mes":"/mo","dorsal":"number","nombre":"name","posicion":"position","edad":"age","rendimiento":"performance",
 "AK Sports Intelligence V4 — Plataforma de Rendimiento Deportivo":"AK Sports Intelligence V4 — Sports Performance Platform"
 };
 const RX=[[/^Bienvenido a (.*)$/,"Welcome to $1"],[/^Jugador «(.*)» eliminado$/,"Player «$1» deleted"],[/^Jugada «(.*)» cargada$/,"Play «$1» loaded"],[/^de (\d+) en plantilla$/,"of $1 on roster"],[/^(\d+) días de prueba$/,"$1 trial days"],[/^CSV importado: (\d+) jugador\(es\)(.*)$/,"CSV imported: $1 player(s)$2"],[/^(\d+) sesión\(es\) · min × RPE$/,"$1 session(s) · min × RPE"],[/^(\d+) por partido$/,"$1 per match"],[/^(\d+)% victorias$/,"$1% wins"]];
@@ -52,7 +52,7 @@ const DICTS={en:EN};
 const supported=["es","en"];
 let LANG=localStorage.getItem("ak_lang")||((navigator.language||"es").slice(0,2));if(!supported.includes(LANG))LANG="en";
 const REG={MX:"MXN",ES:"EUR",FR:"EUR",DE:"EUR",IT:"EUR",PT:"EUR",GB:"GBP"};
-let CUR=localStorage.getItem("ak_cur")||REG[((navigator.language||"").split("-")[1]||"").toUpperCase()]||"USD";
+const curFor=()=>LANG==="es"?"MXN":"USD";
 const PR={MXN:[399,799,1399],USD:[22,44,78],EUR:[20,40,72],GBP:[17,35,62]};
 function trText(s){
  if(LANG==="es")return s;const d=DICTS[LANG];const m=/^(\s*)([\s\S]*?)(\s*)$/.exec(s);const k=m[2];if(!k)return s;
@@ -90,7 +90,7 @@ const obs=new MutationObserver(recs=>{
 });
 function observe(){obs.observe(document.body,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:ATTRS})}
 function renderPrices(){
- const fmt=new Intl.NumberFormat(window.AK_LOCALE,{style:"currency",currency:CUR,maximumFractionDigits:0});
+ const CUR=curFor(),fmt=new Intl.NumberFormat(window.AK_LOCALE,{style:"currency",currency:CUR,maximumFractionDigits:0});
  document.querySelectorAll("#planes .price .amount").forEach((el,k)=>{el.innerHTML=fmt.format(k?PR[CUR][k-1]:0)+(k?` <small>${trText("/mes")}</small>`:"")});
 }
 function setLang(l){
@@ -101,11 +101,7 @@ function setLang(l){
 function build(){
  const mk=()=>{const s=document.createElement("select");s.className="input langsel";s.setAttribute("aria-label","Idioma / Language");s.innerHTML='<option value="es">Español</option><option value="en">English</option>';s.value=LANG;s.onchange=()=>setLang(s.value);return s};
  const nav=document.querySelector(".navin"),cta=document.getElementById("publicCta");if(nav&&cta)nav.insertBefore(mk(),cta);
- const act=document.querySelector(".app-actions");if(act)act.insertBefore(mk(),act.firstChild);
- const lead=document.querySelector("#planes .lead");
- if(lead){const b=document.createElement("div");b.className="curbar";b.innerHTML='<label for="curSel">Moneda / Currency</label><select id="curSel" class="input langsel">'+Object.keys(PR).map(c=>`<option>${c}</option>`).join("")+"</select>";
-  lead.after(b);const s=b.querySelector("select");s.value=CUR;s.onchange=()=>{CUR=s.value;localStorage.setItem("ak_cur",CUR);renderPrices()}}
-}
+ const act=document.querySelector(".app-actions");if(act)act.insertBefore(mk(),act.firstChild);}
 setLocale();build();renderPrices();
 if(LANG!=="es")walk(document.body);
 observe();
