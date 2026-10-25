@@ -121,7 +121,7 @@ dialog::backdrop{background:rgba(0,0,0,.72);backdrop-filter:blur(5px)}
 .profilegrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:900px){.features,.pricing{grid-template-columns:repeat(2,1fr)}.grid4{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}.sidebar{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);display:flex;overflow:auto;gap:4px;padding:8px}.side-title{display:none}.navitem{min-width:max-content;margin:0}.two,.three,.tactics,.profilegrid{grid-template-columns:1fr}.mock{grid-template-columns:1fr}.mock-side{display:none}}
 @media(max-width:600px){.navlinks{display:none}.hero{padding-top:60px}.features,.pricing,.formgrid,.grid4{grid-template-columns:1fr}.content{padding:15px}.appbar{padding:0 12px}.userpill{display:none}.pagehead{align-items:flex-start;flex-direction:column}.cta{padding:30px 18px}.mock-main{grid-template-columns:1fr}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.board.animating .token{transition:left 1.5s ease-in-out,top 1.5s ease-in-out!important}}
 @media print{
  :root{--bg:#fff;--panel:#fff;--panel2:#fff;--text:#000;--muted:#444;--line:#ccc;--green:#0a7d56}
  body{background:#fff;color:#000}
