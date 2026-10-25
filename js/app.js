@@ -56,7 +56,7 @@ function normBoard(b){
  let tokens=arr(b.tokens).filter(t=>t&&TOKEN_TYPES.includes(t.type)).slice(0,80).map(t=>({id:tid(t.id),type:t.type,label:str(t.label).slice(0,3),x:clamp(toNum(t.x,50),0,100),y:clamp(toNum(t.y,50),0,100)}));
  if(!tokens.some(t=>t.type==="home"))tokens=buildTokens(hf,af).concat(tokens.filter(t=>t.type==="ball"||t.type==="cone"));
  const strokes=arr(b.strokes).slice(0,300).map(s=>({t:s&&s.t==="arrow"?"arrow":"free",c:hex(s&&s.c)?s.c:"#f5b942",pts:arr(s&&s.pts).slice(0,800).map(p=>[clamp(toNum(p&&p[0]),0,1),clamp(toNum(p&&p[1]),0,1)])})).filter(s=>s.pts.length>0);
- return{hf,af,tokens,strokes,rivals:b.rivals!==false,kf:{a:normKF(b.kf&&b.kf.a),b:normKF(b.kf&&b.kf.b)}};
+ return{hf,af,tokens,strokes,rivals:b.rivals!==false,kf:{a:normKF(b.kf&&b.kf.a),b:normKF(b.kf&&b.kf.b),m:arr(b.kf&&b.kf.m).slice(0,20).map(normKF).filter(Boolean)}};
 }
 function normalize(s){
  s=s&&typeof s==="object"?s:{};
@@ -379,7 +379,7 @@ function renderTactics(){
  $("#board").classList.toggle("mode-draw",ui.mode!=="move");
  $$('[data-action="setMode"]').forEach(x=>x.setAttribute("aria-pressed",String(x.dataset.mode===ui.mode)));
  $$('[data-action="setColor"]').forEach(x=>x.setAttribute("aria-pressed",String(x.dataset.c===ui.color)));
- renderBoard();renderPlays();
+ renderBoard();renderPlays();updateAnimInfo();
 }
 function moveToken(id,x,y,el){
  const t=tac().tokens.find(k=>k.id===id);if(!t)return;t.x=x;t.y=y;
@@ -408,17 +408,20 @@ function initTactics(){
  draw.addEventListener("pointermove",e=>{if(!cur)return;const p=pt(e);if(cur.t==="arrow")cur.pts=[cur.pts[0],p];else{const l=cur.pts[cur.pts.length-1];if(Math.hypot(p[0]-l[0],p[1]-l[1])>.004)cur.pts.push(p)}renderStrokes()});
  const stop=()=>{if(cur){if(cur.pts.length<2&&cur.t==="arrow")tac().strokes.pop();cur=null;renderStrokes();persist()}};
  draw.addEventListener("pointerup",stop);draw.addEventListener("pointercancel",stop);
- const regen=()=>{const b=tac();b.hf=$("#formHome").value;b.af=$("#formAway").value;b.tokens=buildTokens(b.hf,b.af).concat(b.tokens.filter(t=>t.type==="ball"||t.type==="cone"));b.kf={a:null,b:null};renderBoard();persist()};
+ const regen=()=>{const b=tac();b.hf=$("#formHome").value;b.af=$("#formAway").value;b.tokens=buildTokens(b.hf,b.af).concat(b.tokens.filter(t=>t.type==="ball"||t.type==="cone"));b.kf={a:null,b:null,m:[]};renderBoard();persist()};
  $("#formHome").addEventListener("change",regen);$("#formAway").addEventListener("change",regen);
 }
 function removeToken(id){const b=tac();b.tokens=b.tokens.filter(t=>t.id!==id);renderBoard();persist();toast("Material quitado")}
 const reduceMotion=()=>matchMedia("(prefers-reduced-motion: reduce)").matches;
+let animTimers=[];
+function updateAnimInfo(){const k=tac().kf,el=$("#animInfo");if(!el)return;el.textContent=tr("Inicio")+": "+(k.a?"✔":"—")+" · "+tr("Pasos")+": "+((k.m||[]).length)+" · "+tr("Final")+": "+(k.b?"✔":"—")}
 function playAnim(){
  const b=tac();if(!b.kf.a||!b.kf.b){toast("Fija primero el inicio y el final");return}
- const board=$("#board");board.classList.remove("animating");applyPositions(b.kf.a);
- if(reduceMotion()){applyPositions(b.kf.b);return}
- void board.offsetWidth;board.classList.add("animating");
- setTimeout(()=>{applyPositions(b.kf.b);setTimeout(()=>board.classList.remove("animating"),1600)},60);
+ animTimers.forEach(clearTimeout);animTimers=[];
+ const frames=[b.kf.a].concat(b.kf.m||[],[b.kf.b]),board=$("#board"),STEP=1600;
+ board.classList.remove("animating");applyPositions(frames[0]);void board.offsetWidth;board.classList.add("animating");
+ frames.slice(1).forEach((f,i)=>animTimers.push(setTimeout(()=>applyPositions(f),80+i*STEP)));
+ animTimers.push(setTimeout(()=>board.classList.remove("animating"),80+(frames.length-1)*STEP+200));
 }
 const snapshotPositions=()=>tac().tokens.map(t=>({id:t.id,x:t.x,y:t.y}));
 
@@ -490,9 +493,9 @@ const actions={
  clearStrokes(){if(!tac().strokes.length)return;const s=clone(tac().strokes);tac().strokes=[];renderStrokes();persist();toast("Dibujo borrado",{undo:()=>{tac().strokes=s;renderStrokes();persist()}})},
  toggleRivals(){tac().rivals=!tac().rivals;renderBoard();persist()},
  addGear(d){tac().tokens.push({id:uid(),type:d.type,label:"",x:50,y:50});renderBoard();persist()},
- resetBoard(){const b=tac();b.tokens=buildTokens(b.hf,b.af);b.kf={a:null,b:null};renderBoard();persist();toast("Posiciones iniciales")},
- fixStart(){tac().kf.a=snapshotPositions();persist();toast("Inicio fijado: mueve las fichas y fija el final")},
- fixEnd(){tac().kf.b=snapshotPositions();persist();toast("Final fijado: ya puedes reproducir")},
+ resetBoard(){const b=tac();b.tokens=buildTokens(b.hf,b.af);b.kf={a:null,b:null,m:[]};renderBoard();persist();toast("Posiciones iniciales")},
+ fixStart(){const k=tac().kf;k.a=snapshotPositions();k.m=[];k.b=null;persist();updateAnimInfo();toast("Inicio fijado: mueve las fichas, agrega pasos y fija el final")},addStep(){const k=tac().kf;if(!k.a){toast("Primero fija el inicio");return}k.m=k.m||[];if(k.m.length>=20){toast("Máximo 20 pasos");return}k.m.push(snapshotPositions());persist();updateAnimInfo();toast("Paso "+k.m.length+" agregado")},
+ fixEnd(){if(!tac().kf.a){toast("Primero fija el inicio");return}tac().kf.b=snapshotPositions();persist();updateAnimInfo();toast("Final fijado: ya puedes reproducir")},
  playAnim(){playAnim()},
  gotoStart(){if(!tac().kf.a){toast("Aún no fijas un inicio");return}applyPositions(tac().kf.a)},
  savePlay(){$("#playName").value="";openDlg("playDlg");setTimeout(()=>$("#playName").focus(),0)},
